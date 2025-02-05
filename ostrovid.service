@@ -1,0 +1,15 @@
+[Unit]
+Description=Daemon ostrovid, collecting information about online statuses.
+After=network.target
+
+[Service]
+User=ostrovid
+Group=ostrovid
+WorkingDirectory=/home/ostrovid/GossipAnalytics
+ExecStart=/bin/sh -c '. ./secrets.sh;/bin/python3 ./ostrovid.py'
+ExecReload=/bin/kill -s HUP $MAINPID
+TimeoutStopSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
